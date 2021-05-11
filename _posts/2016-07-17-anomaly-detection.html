@@ -3,7 +3,8 @@ layout: post
 title: 'Anomaly Detection, a short tutorial using Python'
 published: true
 gh-repo: aqibsaeed/Anomaly-Detection
-gh-badge: [fork]
+gh-badge:
+  - fork
 ---
 <div>
 <link href="../css/prism.css" rel="stylesheet" />
@@ -12,16 +13,13 @@ gh-badge: [fork]
 <script src="../js/prism-linenumbers.js"></script>
 </div>
 <div class="text-justify">
-<p>
-Anomaly detection is the problem of identifying data points that don't conform to expected (normal) behaviour. Unexpected data points are also known as outliers and exceptions etc. Anomaly detection has crucial significance in the wide variety of domains as it provides critical and actionable information. For example, an anomaly in MRI image scan could be an indication of the malignant tumour or anomalous reading from production plant sensor may indicate faulty component.</p>
+<p>Anomaly detection is the problem of identifying data points that do not conform to expected (normal) behavior. Unexpected data points are also known as outliers and exceptions. Anomaly detection has a crucial significance in various domains as it provides critical and actionable information. For example, an anomaly in MRI image scan could be an indication of the malignant tumor, or anomalous reading from production plant sensor may indicate a faulty component.</p>
   
-<p>
-Simply, anomaly detection is the task of defining a boundary around normal data points so that they can be distinguishable from outliers. But several different factors make this notion of defining normality very challenging. E.g. normal behaviour usually evolve in certain domains and the notion that is considered normal in the present could change in future. Moreover, defining the normal region which separates outliers from normal data points is not straightforward in itself.</p>
+<p>Anomaly detection is the task of defining a boundary around normal data points so that they can be distinguishable from outliers. However, several different factors make this notion of defining normality very challenging. E.g., normal behavior usually evolves in certain domains, and the notion that is considered normal in the present could change in the future. Moreover, defining the normal region, which separates outliers from normal data points, is not straightforward in itself.</p>
   
-<p>
-In this tutorial, we will implement anomaly detection algorithm (in Python) to detect outliers in computer servers. This algorithm is dissuced by Andrew Ng in his course of <a href="https://www.coursera.org/learn/machine-learning">Machine Learning</a> on Coursera. To keep things simple we will use two features 1) throughput in mb/s and 2) latency in ms of response for each server. The Gaussian model will be used to learn an underlying pattern of the dataset with the hope that our features follow the gaussian distribution. After that, we will find data points with very low probabilities of being normal and hence can be considered outliers. For training set, we will first learn the gaussian distribution of each feature for which mean and variance of features are required. Numpy provides the method to calculate both mean and variance (covariance matrix) efficiently. Similarly, Scipy library provide method to estimate gaussian distribution.</p>
+<p>In this tutorial, we will implement an anomaly detection algorithm (in Python) to detect outliers in computer servers. This algorithm is discussed by Andrew Ng in his course of <a href="https://www.coursera.org/learn/machine-learning">Machine Learning</a> on Coursera. To keep things simple, we will use two features 1) throughput in mb/s and 2) latency in ms of response for each server. The Gaussian model will be used to learn an underlying pattern of the dataset, hoping that our features follow the Gaussian distribution. After that, we will find data points with very low probabilities of being normal and can be considered outliers. For the training set, we will first learn the gaussian distribution of each feature for which the mean and variance of features are required. Numpy provides the method to calculate both mean and variance (covariance matrix) efficiently. Similarly, the Scipy library provides a method to estimate Gaussian distribution.</p>
 
-<p>Let's get started! By first importing requried libraries and defining functions for reading data, mean normalizing features and estimating gaussian distribution.</p>
+<p>Let's get started! By first importing required libraries and defining functions for reading data, mean normalizing features and estimating Gaussian distribution.</p>
   
 <pre><code class="language-python line-numbers">import matplotlib.pyplot as plt
 import numpy as np
@@ -48,7 +46,7 @@ def multivariateGaussian(dataset,mu,sigma):
     p = multivariate_normal(mean=mu, cov=sigma)
     return p.pdf(dataset)</code></pre>
 
-<p>Next, define a function to find the optimal value for threshold (epsilon) that can be used to differentiate between normal and anomalous data points. For learning the optimal value of epsilon we will try different values in a range of learned probabilities on a cross-validation set. The f-score will be calculated for predicted anomalies based on the ground truth data available. The epsilon value with highest f-score will be selected as threshold i.e. the probabilities that lie below the selected threshold will be considered anomalous.</p> 
+<p>Next, define a function to find the optimal value for threshold (epsilon) that can be used to differentiate between normal and anomalous data points. For learning the optimal value of epsilon, we will try different values in a range of learned probabilities on a cross-validation set. The f-score will be calculated for predicted anomalies based on the ground truth data available. The epsilon value with the highest f-score will be selected as a threshold, i.e., the probabilities that lie below the selected threshold will be considered anomalous.</p> 
 
 <pre><code class="language-python line-numbers">def selectThresholdByCV(probs,gt):
     best_epsilon = 0
@@ -66,7 +64,7 @@ def multivariateGaussian(dataset,mu,sigma):
 </div>
   
 <div class="text-justify">
-<p>We have all the required pieces, next let's call above defined functions to find anomalies in the dataset. Also, as we are dealing with only two features here, plotting helps us visualize the anomalous data points.</p>
+<p>We have all the required pieces; next, let us call the above-defined functions to find anomalies in the dataset. Also, as we are dealing with only two features here, plotting helps us visualize the anomalous data points.</p>
 
 <pre><code class="language-python line-numbers">tr_data = read_dataset('tr_server_data.csv') 
 cv_data = read_dataset('cv_server_data.csv') 
