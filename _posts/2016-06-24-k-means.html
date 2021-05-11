@@ -3,12 +3,13 @@ layout: post
 title: Implementing K-Means in Octave/Matlab
 published: true
 gh-repo: aqibsaeed/Matlab-ML
-gh-badge: [fork]
+gh-badge:
+  - fork
 ---
 <div class="text-justify">
-<p>The K-means algorithm is the well-known partitional clustering algorithm. Given a set of data points and the required number of k clusters (k is specified by the user), this algorithm iteratively partitions the data into k clusters based on a distance function. Concretely, with a set of data points x1,…xn. The K-means algorithm groups the data into k cohesive clusters. Each cluster has a cluster center, called centroid. The cluster centroid is used to represent the cluster and it is the mean of all the data points that belongs to the cluster.</p>
+<p>The K-means algorithm is the well-known partitional clustering algorithm. Given a set of data points and the required number of k clusters (k is specified by the user), this algorithm iteratively partitions the data into k clusters based on a distance function. Concretely, with a set of data points x1,…xn. The K-means algorithm groups the data into k cohesive clusters. Each cluster has a cluster center, called the centroid. The cluster centroid is used to represent the cluster, and it is the mean of all the data points that belongs to the cluster.</p>
 
-<p>The intuition behind K-means is an iterative procedure that starts by randomly assigning k data points as initial centroids. Then, the distance is computed between each centroid and every data point. Each data point is assigned to the cluster (centroid) with the lowest distance. After the assignment of every data points to the clusters, the centroids are re-computed using the data points of the newly created clusters. These steps of cluster assignment and centroid re-computation are  repeated until the convergence criteria is met.</p>
+<p>The intuition behind K-means is an iterative procedure that starts by randomly assigning k data points as initial centroids. Then, the distance is computed between each centroid and every data point. Each data point is assigned to the cluster (centroid) with the lowest distance. After the assignment of every data point to the clusters, the centroids are re-computed using the data points of the newly created clusters. These steps of cluster assignment and centroid re-computation are  repeated until the convergence criteria are met.</p>
 </div>
 
 
@@ -20,8 +21,8 @@ gh-badge: [fork]
 <li>Re-computing K centroids</li>
 </ol>
 
-<p>Step 1 will be performed in the start of the training process. Whereas, step 2 and 3 will be repeated in a loop until convergence. So let's get started by implementing first method for random initalization of K centroids.</p>
-
+<p>Step 1 will be performed at the start of the training process. Whereas steps 2 and 3 will be repeated in a loop until convergence. So let us get started by implementing the first method for random initialization of K centroids.</p>
+  
 <p>
 <script src="https://gist.github.com/aqibsaeed/b1c7f5a7ad2767b0fb8d27ef9d3b7858.js"></script>
 </p>
@@ -32,11 +33,11 @@ gh-badge: [fork]
 
 <p><code>getClosestCentroids</code> method will compute euclidean distance of every data point to each cluster centroid and assign the data point to the one with lowest distance.</p> 
 
-<p>The last method that we need to implement is to re-compute the cluster centroids. For this purpose we will compute the mean of all the data points in each cluster and assign the calculated mean as new centroid of the cluster.</p>
+<p>The last method that we need to implement is to re-compute the cluster centroids. For this purpose, we will compute the mean of all the data points in each cluster and assign the calculated mean as the new centroid of the cluster.</p>
   
 <p><script src="https://gist.github.com/aqibsaeed/a7ff0a4ba1a38a9087f1b7cda82a6185.js"></script></p>
  
-<p>That's it, now we have all the pieces required to implement the K-Means. The final piece of code (given below) will execute defined methods until maximum iterations are reached. For stoping criteria you can use other techniques (e.g. no assignment of data points to different clusters) but here for simplicity I am using maximum number of iterations. If you interested in finding out how to select K automatically check the resources mentioned at the end of the tutorial.</p>
+<p>That is it; now we have all the pieces required to implement the K-Means. The final piece of code (given below) will execute defined methods until maximum iterations are reached. For stoping criteria, you can use other techniques (e.g., no assignment of data points to different clusters), but here for simplicity, I am using a maximum number of iterations. If you are interested in selecting K, automatically check the resources mentioned at the end of the tutorial.</p>
 
 <p><script src="https://gist.github.com/aqibsaeed/a64633887114ebc548fe928e52dfa1ac.js"></script></p>
   
