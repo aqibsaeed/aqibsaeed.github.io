@@ -1,0 +1,249 @@
+---
+layout: post
+title: Deploying Tensorflow model on Andorid device for Human Activity Recognition
+published: true
+gh-repo: aqibsaeed/Human-Activity-Recognition-using-CNN
+gh-badge:
+  - fork
+---
+<div>
+<link href="../css/prism.css" rel="stylesheet" />
+<link href="../css/prism-linenumbers.css" rel="stylesheet" />
+<script src="../js/prism.js"></script>
+<script src="../js/prism-linenumbers.js"></script>
+</div>
+
+<div class="text-justify"><p>Check latest version: <a href="https://aqibsaeed.github.io/on-device-activity-recognition">On-Device Activity Recognition</a></p></div>
+
+<div class="text-justify">
+<p>In this tutorial, we will learn how to deploy the human activity recognition (HAR) model on an Android device for real-time prediction. The majority of the code in this post is primarily taken from Omid Alemi's simply elegant tutorial named <a href="https://omid.al/posts/2017-02-20-Tutorial-Build-Your-First-Tensorflow-Android-App.html">"Build Your First Tensorflow Android App"</a>. This post could not have been possible without Omid's contribution. I am building upon his work in this post. If you have not seen the post on how to build a deep convolutional neural network for HAR, please follow this <a href="http://aqibsaeed.github.io/2016-11-04-human-activity-recognition-cnn/">link</a>. Here, details on how to freeze and export the model for use in the Android app are discussed.</p>
+
+<p> We need to have a frozen Tensorflow graph with learned weights that will be imported into an Android app for making predictions using accelerometer data. Before proceeding further make sure, the model input and output nodes have given valid names. Another thing to notice is that the input shape of the CNN model is 1 x 90 x 3 (i.e., height, width, and channels). However, from Android, we will feed a vector of size 270 (i.e., 90 x 3) that we can reshape in the Tensorflow model. For doing this, the input node of shape (None, 270) will be added on top of the earlier input node as follows:</p>
+
+
+<pre><code class="language-python line-numbers">X = tf.placeholder(tf.float32, shape=[None,input_width * num_channels], name="input")
+X_reshaped = tf.reshape(X,[-1,1,90,3]) 
+</code></pre>
+
+<p>Now add following lines of code after model training steps to checkpoint and save the graph definition.</p>
+
+<pre><code class="language-python line-numbers">with tf.Session() as session:
+	/** 
+		------- Model training code goes here ------
+	**/
+	tf.train.write_graph(session.graph_def, '.', '../har.pbtxt')  
+	saver.save(session,save_path = "../har.ckpt")
+</code></pre>
+
+<p>Next, the checkpointed model will be frozen and its optimized version can be saved as follows:</p>
+
+<pre><code class="language-python line-numbers">from tensorflow.python.tools import freeze_graph
+from tensorflow.python.tools import optimize_for_inference_lib
+
+freeze_graph.freeze_graph(input_graph = "../har.pbtxt",  input_saver = "",
+             input_binary = False, input_checkpoint = "../har.ckpt", output_node_names = "y_",
+             restore_op_name = "save/restore_all", filename_tensor_name = "save/Const:0",
+             output_graph = "frozen_har.pb", clear_devices = True, initializer_nodes = "")
+
+input_graph_def = tf.GraphDef()
+with tf.gfile.Open(output_frozen_graph_name, "r") as f:
+    data = f.read()
+    input_graph_def.ParseFromString(data)
+
+output_graph_def = optimize_for_inference_lib.optimize_for_inference(
+        input_graph_def,
+        ["input"], 
+        ["y_"],
+        tf.float32.as_datatype_enum)
+
+f = tf.gfile.FastGFile("optimized_har.pb", "w")
+f.write(output_graph_def.SerializeToString())
+</code></pre>
+
+<p>Let's make a simple Android app to get accelerometer data and make predictions about user activities with the learned model. Before doing so, get Tensorflow libraries for Android from the following <a href="https://ci.tensorflow.org/view/Nightly/job/nightly-android/">link</a>. For the purpose of this tutorial, I used the libraries with artifact number 117.</p> <p>We will now create an empty app and copy <i>libandroid_tensorflow_inference_java.jar</i>, <i>arm64-v8a</i>, <i>armeabi-v7a</i>, <i>x86</i> and <i>x86_64</i> files/folders in libs directory of the project. Also, copy the frozen optimized model into an asset directory of the project. The figure shows directory structure after copying all the required files.</p>
+<p style="text-align:center"><img src="../img/directory_structure.PNG" alt="Directory Structure"/></p> 
+
+<p>Afterwards, add following entry in <code>build.gradle</code> file to let build system know where files are located.</p>
+<pre><code class="language-python line-numbers">sourceSets{
+	main {
+		jniLibs.srcDirs = ['libs']
+	}
+}</code></pre>
+
+<p>Now we create a class, which will use <code>TensorflowInferenceInterface</code> for feeding data to a model, running inference and getting back results.</p>
+
+<pre><code class="language-java line-numbers">import android.content.Context;
+import android.content.res.AssetManager;
+import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
+
+public class ActivityInference {
+    static {
+        System.loadLibrary("tensorflow_inference");
+    }
+
+    private static ActivityInference activityInferenceInstance;
+    private TensorFlowInferenceInterface inferenceInterface;
+    private static final String MODEL_FILE = "file:///android_asset/optimized_har.pb";
+    private static final String INPUT_NODE = "input";
+    private static final String[] OUTPUT_NODES = {"y_"};
+    private static final String OUTPUT_NODE = "y_";
+    private static final long[] INPUT_SIZE = {1,270};
+    private static final int OUTPUT_SIZE = 6;
+    private static AssetManager assetManager;
+
+    public static ActivityInference getInstance(final Context context)
+    {
+        if (activityInferenceInstance == null)
+        {
+            activityInferenceInstance = new ActivityInference(context);
+        }
+        return activityInferenceInstance;
+    }
+
+    public ActivityInference(final Context context) {
+        this.assetManager = context.getAssets();
+        inferenceInterface = new TensorFlowInferenceInterface(assetManager, MODEL_FILE);
+    }
+
+    public float[] getActivityProb(float[] input_signal)
+    {
+        float[] result = new float[OUTPUT_SIZE];
+        inferenceInterface.feed(INPUT_NODE,input_signal,INPUT_SIZE);
+        inferenceInterface.run(OUTPUT_NODES);
+        inferenceInterface.fetch(OUTPUT_NODE,result);
+        //Downstairs   Jogging      Sitting  Standing   Upstairs   Walking
+        return result;
+    }
+}
+</code></pre>
+
+<p>The rest of the code provided below is from <code>MainActivity</code> class. It is listening to accelerometer sensor and using <code>getActivityProb</code> method of <code>ActivityInference</code> class for getting a probability of each class to update the UI.</p>
+
+<pre><code class="language-java line-numbers">import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    private final int N_SAMPLES = 90;
+    private static List<Float> x;
+    private static List<Float> y;
+    private static List<Float> z;
+    private static List<Float> input_signal;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ActivityInference activityInference;
+
+    private TextView downstairsTextView;
+    private TextView joggingTextView;
+    private TextView sittingTextView;
+    private TextView standingTextView;
+    private TextView upstairsTextView;
+    private TextView walkingTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        x = new ArrayList<Float>();
+        y = new ArrayList<Float>();
+        z = new ArrayList<Float>();
+        input_signal = new ArrayList<Float>();
+
+        downstairsTextView = (TextView)findViewById(R.id.downstairs_prob);
+        joggingTextView = (TextView)findViewById(R.id.jogging_prob);
+        sittingTextView = (TextView)findViewById(R.id.sitting_prob);
+        standingTextView = (TextView)findViewById(R.id.standing_prob);
+        upstairsTextView = (TextView)findViewById(R.id.upstairs_prob);
+        walkingTextView = (TextView)findViewById(R.id.walking_prob);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mAccelerometer , 
+			SensorManager.SENSOR_DELAY_FASTEST);
+        activityInference = new ActivityInference(getApplicationContext());
+    }
+
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, mAccelerometer, 
+		SensorManager.SENSOR_DELAY_FASTEST);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        activityPrediction();
+        x.add(event.values[0]);
+        y.add(event.values[1]);
+        z.add(event.values[2]);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    private void activityPrediction()
+    {
+        if(x.size() == N_SAMPLES && y.size() == N_SAMPLES && z.size() == N_SAMPLES) {
+            // Copy all x, y and z values to input_signal
+            int i = 0;
+            while (i < NUM_SAMPLES) {
+              input_signal.add(x.get(i));
+              input_signal.add(y.get(i));
+              input_signal.add(z.get(i));
+              i++;
+            }
+
+            // Perform inference using Tensorflow
+            float[] results = activityInference.getActivityProb(toFloatArray(input_signal));
+
+            downstairsTextView.setText(Float.toString(round(results[0],2)));
+            joggingTextView.setText(Float.toString(round(results[1],2)));
+            sittingTextView.setText(Float.toString(round(results[2],2)));
+            standingTextView.setText(Float.toString(round(results[3],2)));
+            upstairsTextView.setText(Float.toString(round(results[4],2)));
+            walkingTextView.setText(Float.toString(round(results[5],2)));
+
+            // Clear all the values
+            x.clear(); y.clear(); z.clear(); input_signal.clear();
+        }
+    }
+
+    private float[] toFloatArray(List<Float> list)
+    {
+        int i = 0;
+        float[] array = new float[list.size()];
+
+        for (Float f : list) {
+            array[i++] = (f != null ? f : Float.NaN);
+        }
+        return array;
+    }
+
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+}</code></pre>
+<p>
+This is all that we need to use Tensorflow on Android for making predictions about user activities. A simple app UI will look something as shown in the screenshot below.</p>
+<p style="text-align:center"><img src="../img/har_app_screenshot.png" alt="HAR App Screenshot"/></p> 
+<p>The complete code of the app is available at the following <a href="https://github.com/aqibsaeed/Human-Activity-Recognition-using-CNN/tree/master/ActivityRecognition">link</a>. If you have any question, please comment below. 
+</p>
+</div>
