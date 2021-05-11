@@ -3,7 +3,8 @@ layout: post
 title: Implementing a CNN for Human Activity Recognition in Tensorflow
 published: true
 gh-repo: aqibsaeed/Human-Activity-Recognition-using-CNN
-gh-badge: [fork]
+gh-badge:
+  - fork
 ---
 
 <div>
@@ -16,12 +17,13 @@ gh-badge: [fork]
 <div class="text-justify"><p>Check latest version: <a href="https://aqibsaeed.github.io/on-device-activity-recognition">On-Device Activity Recognition</a></p></div>
 
 <div class="text-justify">
-<p>In the recent years, we have seen a rapid increase in smartphones usage which are equipped with sophisticated sensors such as accelerometer and gyroscope etc. These devices provide the opportunity for continuous collection and monitoring of data for various purposes. One such application is human activity recognition (HAR) using data collected from smartphone’s accelerometer. There are several techniques proposed in the literature for HAR using machine learning (see <a href="https://www.researchgate.net/publication/220813418_Feature_Learning_for_Activity_Recognition_in_Ubiquitous_Computing">[1]</a>) The performance (accuracy) of such methods largely depends on good feature extraction methods. Hand-crafting features in a specific application area require very good domain knowledge. Neural networks especially deep learning methods are applied successfully to solve very difficult problems such as object recognition, machine translation, audio generation etc. In literature, similar work has also been done for HAR using deep learning techniques (see <a href="http://www.ijcai.org/Proceedings/15/Papers/561.pdf">[2]</a>).</p>
-<p>In this post, we will see how to employ Convolutional Neural Network (CNN) for HAR, that will learn complex features automatically from the raw accelerometer signal to differentiate between different activities of daily life.</p>
+<p>In recent years, we have seen a rapid increase in smartphone usage, equipped with sophisticated sensors such as accelerometers and gyroscopes, and more. These devices provide the opportunity for continuous collection and monitoring of data for various purposes. One such application is human activity recognition (HAR), using data collected from a smartphone's accelerometer. There are several techniques proposed in the literature for HAR using machine learning (see <a href= "https://www.researchgate.net/publication/220813418_Feature_Learning_for_Activity_Recognition_in_Ubiquitous_Computing">[1]</a>). The performance (accuracy) of such methods largely depends on good feature extraction methods. Hand-crafting features in a specific application area require very good domain knowledge. Neural networks, especially deep learning methods, are applied successfully to solve difficult problems, such as object recognition, machine translation, audio generation, etc. In literature, similar work has also been done for HAR using deep learning techniques (see <a href="http://www.ijcai.org/Proceedings/15/Papers/561.pdf">[2]</a>).</p>
+<p>In this post, we will see how to employ Convolutional Neural Network (CNN) for HAR, which will learn complex features automatically from the raw accelerometer signal to differentiate between different daily life activities.</p>
 </div>
+
 <div class="text-justify">
 <h3>Dataset and Preprocessing</h3>
-<p>We will use <a href="http://www.cis.fordham.edu/wisdm/dataset.php">Actitracker</a> data set released by <a href="http://www.cis.fordham.edu/wisdm/">Wireless Sensor Data Mining (WISDM)</a> lab. This dataset contains six daily activities collected in a controlled laboratory environment. The activities include jogging, walking, ascending stairs, descending stairs, sitting and standing. The data is collected from 36 users using a smartphone in their pocket with the 20Hz sampling rate (20 values per second). The dataset distribution with respect to activities (class labels) is shown in the figure below.</p>
+<p>We will use <a href="http://www.cis.fordham.edu/wisdm/dataset.php">Actitracker</a> data set released by <a href="http://www.cis.fordham.edu/wisdm/">Wireless Sensor Data Mining (WISDM)</a> lab. This dataset contains six daily activities collected in a controlled laboratory environment. The activities include jogging, walking, ascending stairs, descending stairs, sitting, and standing. The data is collected from 36 users using smartphones in their pocket with the 20Hz sampling rate (20 values per second). The dataset distribution with respect to activities (class labels) is shown in the figure below.</p>
 
 <p style="text-align:center"><img src="../img/har-dataset-distribution.png" alt="HAR dataset distribution"/></p> 
 
@@ -81,7 +83,7 @@ dataset['z-axis'] = feature_normalize(dataset['z-axis'])</code></pre>
 <p style="text-align:center"><img src="../img/har-activity-upstairs.png" alt="Upstairs Activity"/></p> 
 <p style="text-align:center"><img src="../img/har-activity-jogging.png" alt="Jogging Activity"/></p> 
 
-<p>Now we have to prepare the dataset in a format required by the CNN model. For doing this we define some helper functions to create fixed sized segments from the raw signal. The <code>windows</code> function will generate indexes as specified by the size parameter by moving over the signal by fixed step size. The window size used is 90, which equals to 4.5 seconds of data and as we are moving each time by 45 points the step size is equal to 2.25 seconds. The label (activity) for each segment will be selected by the most frequent class label presented in that window. The <code>segment_signal</code> will generate fixed size segments and append each signal component along the third dimension so that the input dimension will be [total segments, input width and input channel]. We will reshape the generated segments to have a height of 1 as we are going to perform one-dimensional convolution (depth wise) over the signal. Moreover, labels will be one hot encoded using <code>get_dummies</code> function available in Pandas package.</p>
+<p>Now, we have to prepare the dataset in a format required by the CNN model. For doing this, we define some helper functions to create fixed-sized segments from the raw signal. The <code>windows</code> function will generate indexes as specified by the size parameter by moving over the signal by the fixed step size. The window size used is 90, which equals 4.5 seconds of data, and as we are moving each time by 45 points, the step size is equal to 2.25 seconds. The label (activity) for each segment will be selected by the most frequent class label presented in that window. The <code>segment_signal</code> will generate fixed-size segments and append each signal component along the third dimension so that the input dimension will be [total segments, input width, and input channel]. We will reshape the generated segments to have a height of 1 as we will perform one-dimensional convolution (depth-wise) over the signal. Moreover, labels will be one hot encoded using <code>get_dummies</code> function available in Pandas package.</p>
 
 <pre><code class="language-python line-numbers">def windows(data, size):
     start = 0
@@ -116,11 +118,11 @@ test_y = labels[~train_test_split]</code></pre>
 
 <div class="text-justify">
 <h3>The CNN Model</h3>
-<p>The figure below provides the CNN model architecture that we are going to implement using Tensorflow. If you are comfortable with Keras or any other deep learning framework, feel free to use that. The model will consist of one convolution layer followed by max pooling and another convolution layer. After that, the model will have fully connected layer which is connected to Softmax layer. Remember that the convolution and max-pool layers will be 1D or temporal.</p>
+<p>The figure below provides the CNN model architecture that we will implement using Tensorflow. If you are comfortable with Keras or any other deep learning framework, feel free to use that. The model will consist of one convolution layer followed by max-pooling and another convolution layer. After that, the model will have a fully connected layer that is connected to the Softmax layer. Remember that the convolution and max-pool layers will be 1D or temporal.</p>
 
 <p style="text-align:center"><img src="../img/har-cnn.PNG" alt="HAR CNN architecture"/></p> 
 
-<p>First, let’s define some helper functions and configuration variable for our CNN model. The helper functions will be wrapper around Tensorflow functions to increase reuse and readability. The <code>weight_variable</code> and <code>bias_variable</code> will initialize Tensorflow variables for our model layers. The <code>apply_depthwise_conv</code> (see <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/api_docs/python/functions_and_classes/shard4/tf.nn.depthwise_conv2d_native.md">Depthwise Convolution</a>) will perform 1D convolution on each input channel separately and pass the output through ReLU activation function. Likewise, <code>apply_max_pool</code> will perform 1D max pooling on the output of convolution layer. </p>
+<p>First, let’s define some helper functions and configuration variable for our CNN model. The helper functions will be wrapper around Tensorflow functions to increase reuse and readability. The <code>weight_variable</code> and <code>bias_variable</code> will initialize Tensorflow variables for our model layers. The <code>apply_depthwise_conv</code> (see <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/api_docs/python/functions_and_classes/shard4/tf.nn.depthwise_conv2d_native.md">Depthwise Convolution</a>) will perform 1D convolution on each input channel separately and pass the output through ReLU activation function. Likewise, <code>apply_max_pool</code> will perform 1D max pooling on the output of convolution layer.</p>
 
 <pre><code class="language-python line-numbers">input_height = 1
 input_width = 90
@@ -157,7 +159,7 @@ def apply_max_pool(x,kernel_size,stride_size):
     return tf.nn.max_pool(x, ksize=[1, 1, kernel_size, 1], 
                           strides=[1, 1, stride_size, 1], padding='VALID')</code></pre>
 
-<p>Tensorflow placeholders for input and output data are defined next. The first convolution layer has a filter size and depth of 60 (number of channels, we will get as output from convolution layer). The pooling layer’s filter size is set to 20 and with a stride of 2. Next, the convolution layer takes an input of max-pooling layer apply the filter of size 6 and will have a tenth of depth as of max-pooling layer. After that, the output is flattened out for the fully connected layer input. There are 1000 neurones in the fully connected layer as defined by the above configuration. The tanh function is used as non-linearity in this layer. Lastly, the Softmax layer is defined to output probabilities of the class labels.</p>
+<p>Tensorflow placeholders for input and output data are defined next. The first convolution layer has a filter size and depth of 60 (number of channels we will get as output from the convolution layer). The pooling layer’s filter size is set to 20 and with a stride of 2. Next, the convolution layer takes an input of the max-pooling layer to apply the filter of size six and will have a tenth of depth as of the max-pooling layer. After that, the output is flattened out for the fully connected layer input. There are 1000 neurons in the fully connected layer as defined by the above configuration. The tanh function is used as non-linearity in this layer. Lastly, the Softmax layer is defined to output probabilities of the class labels.</p>
 
 <pre><code class="language-python line-numbers">X = tf.placeholder(tf.float32, shape=[None,input_height,input_width,num_channels])
 Y = tf.placeholder(tf.float32, shape=[None,num_labels])
@@ -186,7 +188,7 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate = learning_rate).min
 correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(Y,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</code></pre>
 
-<p>We have all the required pieces for CNN. Next, let’s write code for training the model. The code provided below, will train the CNN model using a batch size of 10 for 5 training epochs. At each epoch, we will print out the model’s loss and accuracy on the training set. At the end of training, the model will classify the testing set instances and will print out achieved accuracy.</p>
+<p>We have all the required pieces for CNN. Next, let us write code for training the model. The code below will train the CNN model using a batch size of ten for five training epochs. At each epoch, we will print out the model’s loss and accuracy on the training set. At the end of the training, the model will classify the testing set instances and print out the accuracy.</p>
 
 <pre><code class="language-python line-numbers">with tf.Session() as session:
     tf.global_variables_initializer().run()
@@ -204,7 +206,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</code></pre>
     print "Testing Accuracy:", session.run(accuracy, feed_dict={X: test_x, Y: test_y})</code></pre>
 </div>
 <div class="text-justify">
-<p>In this blog post, we saw how to process accelerometer data set for CNN input, visualise it and train a deep network to classify 6 daily life activities using Actitracker dataset. If you have any question or feedback, please comment below.</p>
+<p>In this blog post, we saw how to process the accelerometer data set for CNN input, visualize it and train a deep network to classify six daily life activities using the Actitracker dataset. If you have any questions or feedback, please comment below.</p>
 
 <p><i>The python notebook is available at the following <a href="https://github.com/aqibsaeed/Human-Activity-Recognition-using-CNN"><b>link</b></a>.</i></p>
 </div>
