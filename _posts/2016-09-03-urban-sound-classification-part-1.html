@@ -16,9 +16,9 @@ gh-badge:
 <div class="text-justify">
 <p>Last updated: 28-05-2020</p>  
   
-<p>We all got exposed to different sounds every day. Like, the sound of car horns, siren and music etc. How about teaching computer to classify such sounds automatically into categories! </p>
+<p>We all got exposed to different sounds every day. Like, the sound of car horns, sirens, and music, etc. How about teaching a computer to classify such sounds automatically into categories!</p>
   
-<p>In this blog post, we will learn techniques to classify urban sounds into specific categories (such as car horn and siren) with machine learning. Earlier blog posts covered classification problems where data can be easily expressed in vector form.  For example, in the textual dataset, each word in the corpus becomes feature and tf-idf score becomes its value. Likewise, in <a href="http://aqibsaeed.github.io/2016-08-10-logistic-regression-tf/" target="_blank">anomaly detection dataset</a><em>&nbsp;</em>we saw two features &ldquo;throughput&rdquo; and &ldquo;latency&rdquo; that fed into a classifier to predict outliers. But when it comes to sound, feature extraction is not quite straightforward. Today, we will first see what features can be extracted from sound dataset and how easy it is to extract such features in Python using open source library called <a href="http://librosa.github.io">Librosa</a>.</p>
+<p>In this blog post, we will learn techniques to classify urban sounds into specific categories (such as car horns and sirens) with machine learning. Earlier blog posts covered classification problems where data can be easily expressed in vector form.  For example, in the textual dataset, each word in the corpus becomes a feature, and tf-idf score becomes its value. Likewise, in <a href="http://aqibsaeed.github.io/2016-08-10-logistic-regression-tf/" target="_blank">anomaly detection dataset</a><em>&nbsp;</em>we saw two features &ldquo;throughput&rdquo; and &ldquo;latency&rdquo; that fed into a classifier to predict outliers. However, when it comes to sound, feature extraction is not quite straightforward. Today, we will first see what features can be extracted from sound dataset and how easy it is to extract such features in Python using an open source library called <a href="http://librosa.github.io">Librosa</a>.</p>
   
 <p>To get started with this tutorial, please make sure you have following tools installed:</p>
 <ul>
@@ -33,7 +33,7 @@ gh-badge:
 <h2>Dataset</h2>
 <p>We need a labelled dataset that we can be used to train a machine learning model. Fortunately, researchers open-sourced annotated dataset with <a href="https://serv.cusp.nyu.edu/projects/urbansounddataset/" target="_blank"> urban sounds.</a> It contains 8,732 labelled sound clips (4 seconds each) from ten classes: <em>air conditioner, car horn, children playing, dog bark, drilling, engine idling, gunshot, jackhammer, siren, and street music. </em>The dataset by default is divided into 10-folds. To get the dataset please visit the following <a href="https://urbansounddataset.weebly.com/urbansound8k.html" target="_blank">link</a>&nbsp;and if you want to use this dataset in your research kindly don&rsquo;t forget to acknowledge. In this dataset, the sound files are in <em>.wav</em> format but if you have files in another format such as <em>.mp3</em>, then it&rsquo;s good to convert them into <em>.wav</em> format. It&rsquo;s because <em>.mp3</em> is lossy music compression technique, check this <a href="http://www.premiumbeat.com/blog/when-to-use-wav-files-when-to-use-mp3-files-what-is-the-difference-between-the-two-formats/" target="_blank">link</a>&nbsp;for more information. The dataset is pre-split into 10-folds and to keep things managable, we will pre-process the sound files and save them as numpy array so that it will be easy to use afterwards.</p>
   
-<p>Let&rsquo;s read some sound files and visualise to understand how different each sound clip is from the other. Matplotlib&rsquo;s <code>specgram</code> method performs all the required calculation and plotting of the spectrum. Likewise, Librosa provide handy methods for wave and log power spectrogram plotting. By looking at the plots shown in Figure 1 and 2, we can see apparent differences between sound clips of different classes.</p>
+<p>Let's read some sound files and visualize to understand how different each sound clip is from the other. Matplotlib's <code>specgram</code> method performs all the required calculation and plotting of the spectrum. Likewise, Librosa provides handy methods for wave and log power spectrogram plotting. By looking at the plots shown in Figures 1 and 2, we can see apparent differences between sound clips of different classes.</p>
 
 <pre><code class="language-python line-numbers">### Load necessary libraries ###
 import glob
@@ -134,7 +134,7 @@ plot_specgram(sound_names,raw_sounds)</code></pre>
   
 <div class="text-justify">
 <h2>Feature Extraction</h2>
-<p>To extract the useful features from the sound data, we will use <em>Librosa</em> library. It provides several methods to extract a variety of features from the sound clip. We are going to use below mentioned methods to extract various features:</p>
+<p>To extract the useful features from the sound data, we will use <em>Librosa</em> library. It provides several methods to extract a variety of features from the sound clip. We are going to use below-mentioned methods to extract various features:</p>
 <ul>
 <li><em>melspectrogram</em>: Compute a mel-scaled power spectrogram</li>
 <li><em>mfcc</em>: Mel-frequency cepstral coefficients</li>
@@ -142,7 +142,7 @@ plot_specgram(sound_names,raw_sounds)</code></pre>
 <li><em>spectral_contrast</em>: Compute spectral contrast, using method defined in [<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1035731" target="_blank">1</a>]</li>
 <li><em>tonnetz</em>: Computes the tonal centroid features (tonnetz), following the method of [<a href="http://dl.acm.org/citation.cfm?id=1178727" target="_blank">2</a>]</li>
 </ul>
-<p>To make the process of feature extraction from sound clips easy, let's define helper functions. First <code>parse_audio_files</code> which takes parent directory name, sub directory within the parent directory and file extension (default is .wav) as input. It then iterates over all the files within sub directory and invoke a second helper function <code>extract_feature</code>. It takes a file path as input, read the file with<em>librosa.load </em>method, extract and return features mentioned above. These methods are all that is required to convert raw sound clips into informative features (along with a class label for each sound clip) that we can directly utilize to learn a model with classification method of our choice. Note, the class label of each sound clip is in the file name. For example, if the file name is <em>108041-9-0-4.wav </em>then the class label will be 9. Doing string split by &ndash; and taking the second item of the array will give us the class label. To summarize, we will iterate over each file within a fold to extract features and corresponding labels and save them as numpy array.</p>
+<p>To make the process of feature extraction from sound clips easy, let us define helper functions. First <code>parse_audio_files</code> which takes parent directory name, subdirectory within the parent directory and file extension (default is .wav) as input. It then iterates over all the files within the subdirectory and invokes a second helper function <code>extract_feature</code>. It takes a file path as input, read the file with<em>librosa.load </em>method, extract and return features mentioned above. These methods are required to convert raw sound clips into informative features (along with a class label for each sound clip) that we can directly utilize to learn a model with the classification method of our choice. Note, the class label of each sound clip is in the file name. For example, if the file name is <em>108041-9-0-4.wav </em>then the class label will be 9. Doing string split by &ndash, and taking the second item of the array will give us the class label. To summarize, we will iterate over each file within a fold to extract features and corresponding labels and save them as NumPy arrays.</p>
   
 <pre><code class="language-python line-numbers"># Pre-process and extract feature from the data
 parent_dir = 'UrbanSounds8K/audio/'
@@ -158,11 +158,11 @@ for sub_dir in sub_dirs:
 
 <div class="text-justify">
 <h2>Sound Classifier</h2>
-<p><em>Note: If you want to use another standard machine learning algorithm (such as from scikit-learn or any other library) for this purpose, feel free to use that. The goal of this tutorial is to provide an illustrative demonstration of learning network with Tensorflow/Keras. </em></p>
+<p><em>Note: If you want to use another standard machine learning algorithm (such as from scikit-learn or any other library) for this purpose, feel free to use that. The goal of this tutorial is to provide an illustrative demonstration of a learning network with Tensorflow/Keras. </em></p>
   
-<p>Now as we have pre-processed our dataset, it&rsquo;s time to implement a simple feedforward neural network in Keras (Tensorflow) to classify each sound clip into a different category.</p>
+<p>Now, as we have pre-processed our dataset, it&rsquo;s time to implement a simple feedforward neural network in Keras (Tensorflow) to classify each sound clip into a different category.</p>
   
-<p>The code provided below defines a standard feedforward neural network of three layers, each with 256, 128, and 64 units, respectively. Over the last version of this tutorial (from 2016), it can be seen that implmenting and training neural networks has become much easier!</p>
+<p>The code provided below defines a standard feedforward neural network of three layers, each with 256, 128, and 64 units, respectively. Over the last version of this tutorial (from 2016), it can be seen that implementing and training neural networks has become much easier!</p>
   
 <pre><code class="language-python line-numbers">### Define feedforward network architecture ###
 def get_network():
@@ -181,7 +181,7 @@ def get_network():
 
     return model</code></pre>
   
-<p>The last step is to train and evaluate the network with the extracted features using 10-folds cross-validation. This process is straight forward, we will read the data of all training folds combine them and train the network, afterwards evaluate its performance on heldout fold. We will repeat this process ten times covering all the folds and averaging the obtained accuracies to get the final performance estimate.</p>
+<p>The last step is to train and evaluate the network with the extracted features using 10-folds cross-validation. This process is straightforward; we will read the data of all training folds, combine them and train the network, afterward evaluate its performance on the held-out fold. We will repeat this process ten times, covering all the folds and averaging the obtained accuracies to get the final performance estimate.</p>
   
 <pre><code class="language-python line-numbers">### Train and evaluate via 10-Folds cross-validation ###
 accuracies = []
