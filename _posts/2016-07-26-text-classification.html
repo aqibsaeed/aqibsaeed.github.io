@@ -3,7 +3,8 @@ layout: post
 title: Research paper categorization using machine learning and NLP
 published: true
 gh-repo: aqibsaeed/Research-Paper-Categorization
-gh-badge: [fork]
+gh-badge:
+  - fork
 ---
 <div>
 <link href="../css/prism.css" rel="stylesheet" />
@@ -12,13 +13,13 @@ gh-badge: [fork]
 <script src="../js/prism-linenumbers.js"></script>
 </div>
 <div class="text-justify">
-<p>Text classification (a.k.a. text categorization) is one of the most prominent application of Machine Learning. It is used to automatically assign predefined categories (labels) to free-text documents. The purpose of text classification is to give conceptual organization to a large collection of documents. It has become more relevant with exponential growth of the data, with wide applicability in real world applications e.g. categorization of news stories by topics, products classification into multilevel categories, organization of emails into various groups (such as social, primary and promotions), indexing of patients data in healthcare sector from multiple aspects e.g. disease type, surgical procedure and medication given etc.</p>
+<p>Text classification (a.k.a. text categorization) is one of the most prominent applications of Machine Learning. It is used to assign predefined categories (labels) to free-text documents automatically. The purpose of text classification is to give conceptual organization to a large collection of documents. It has become more relevant with the exponential growth of the data, with broad applicability in real-world applications e.g., categorization of news stories by topics, products classification into multilevel categories, organization of emails into various groups (such as social, primary, and promotions), indexing of patients data in the healthcare sector from multiple aspects, e.g., disease type, surgical procedure and medication given, etc.</p>
   
-<p>An interesting application of text classification is to categorize research papers by most suitable conferences.  Finding and selecting a suitable academic conference has always been a challenging task especially for young researchers. We can define a 'suitable academic conference' as a conference, which is aligned with the researcher's work and have a good academic ranking. Usually, a researcher has to consult with their supervisors and search extensively to find a suitable conference. Among many conferences, few are considered to be relevant to send a research work. To fulfil editorial and content specific demands of conferences, a researcher needs to go through the previously published proceedings of a certain conference. Based on the previous proceeding of conferences, the research work is sometimes modified to increase the chances of article acceptances and publication. This problem can be solved to some extent using machine learning techniques e.g. classification algorithms like SVM, Naïve Bayes, etc. </p>
+<p>An interesting application of text classification is to categorize research papers by the most suitable conferences.  Finding and selecting a suitable academic conference has always been a challenging task, especially for young researchers. We can define a 'suitable academic conference' as a conference aligned with the researcher's work and have a good academic ranking. Usually, a researcher has to consult with their supervisors and search extensively to find a suitable conference. Among many conferences, few are considered to be relevant to send a research work. To fulfill editorial and content-specific demands of conferences, a researcher needs to go through the previously published proceedings of a certain conference. Based on the previous conferences, the research work is sometimes modified to increase the chances of article acceptance and publication. This problem can be solved using machine learning techniques, e.g., classification algorithms like SVM, Naïve Bayes, and more. </p>
   
-<p>Thus, the objective of this tutorial is to provide hands-on experience on how to perform text classification using conference proceedings dataset.  We will learn how to apply various classification algorithms to categorize research papers by conferences along with feature selection and dimensionality reduction methods using a popular <a href=” scikit-learn.org”>scikit-learn</a> library in Python.</p>
+<p>Thus, the objective of this tutorial is to provide hands-on experience on how to perform text classification using a conference proceedings dataset.  We will learn how to apply various classification algorithms to categorize research papers by conferences along with feature selection and dimensionality reduction methods using a popular <a href=" scikit-learn.org">scikit-learn</a> library in Python.</p>
   
-<p>Let’s import the required libraries, which we will use to process the text, performing feature selection, model training and evaluation. </p>
+<p> Let us import the required libraries, which we will use to process the text, perform feature selection, model training, and evaluate. </p>
   
 <pre><code class="language-python line-numbers">import pandas as pd 
 import sklearn
@@ -53,7 +54,7 @@ from sklearn.metrics import precision_recall_fscore_support</code></pre>
 
 <p style="text-align:center"><img src="../img/tc-dataset-distribution.png" alt="Dataset distribution"/></p>
   
-<p>The <code>loadData</code> method will be used to read the dataset from a text file and return titles and conference names. Similarly, <code> preProcessing</code> method will take titles as a parameter and will perform text pre-processing steps. By iterating over titles it will convert the text into lowercase and remove the stop words (that are provided in the corpus of NLTK library). You can uncomment one line of code in this method if you wish to remove punctuation and numbers from the titles. Few research paper titles and corresponding conferences are shown in Figure 2.</p>
+<p>The <code>loadData</code> method will be used to read the dataset from a text file and return titles and conference names. Similarly, <code> preProcessing</code> method will take titles as a parameter and will perform text pre-processing steps. By iterating over titles, it will convert the text into lowercase and remove the stop words (that are provided in the corpus of the NLTK library). You can uncomment one line of code in this method if you wish to remove punctuation and numbers from the titles. Few research paper titles and corresponding conferences are shown in Figure 2.</p>
   
 <pre><code class="language-python line-numbers">def loadData(filePath="data.txt"):
     data = pd.read_csv(filePath, header=0, delimiter="\t")
@@ -73,7 +74,7 @@ def preProcessing(titles):
 
 <p style="text-align:center"><img src="../img/tc-dataset-sample.png" alt="Paper titles and conferences"/></p>
   
-<p>Machine learning algorithms require numeric feature vectors to learn the underlying representation of the dataset. For this purpose, we need to convert our text into some numeric form. There are a couple of different ways to do this. We will use Term frequency-inverse document frequency or TF-IDF. It is the measure of how important the term is, for a particular document in a corpus. If the term is frequent in the document and appears less frequently in the corpus, then the term is of high importance for the document. It is computed by the product of two terms as follows: the first computes the term frequency (tf), aka. A number of times a word appears in a document, divided by the total number of words in that document; the second term is the inverse document frequency (idf), computed as the logarithm of the number of the documents in the corpus divided by the number of documents where the specific term appears. Hence, terms in the document with a high tf-idf score occur frequently in the document and provide the most information about that specific document.</p>
+<p>Machine learning algorithms require numeric feature vectors to learn the underlying representation of the dataset. For this purpose, we need to convert our text into some numeric form. There are a couple of different ways to do this. We will use the Term frequency-inverse document frequency or TF-IDF. It is the measure of how important the term is for a particular document in a corpus. If the term is frequent in the document and appears less frequently in the corpus, then the term is of high importance for the document. It is computed by the product of two terms as follows: the first computes the term frequency (tf), aka. A number of times a word appears in a document, divided by the total number of words in that document; the second term is the inverse document frequency (idf), computed as the logarithm of the number of the documents in the corpus divided by the number of documents where the specific term appears. Hence, terms in the document with a high tf-idf score frequently occur in the document and provide the most information about that specific document.</p>
   
 <p>The <code>getDTMByTFIDF</code> method takes two parameters pre-processed title and number of (top) maximum feature that we want to get from the corpus. If <code>None</code> is passed as <code>nfeatures</code>, the method will return all the terms. <code>TfidfVectorizer</code> takes several other parameters to learn more about this consult the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">documentation</a>. This method also returns the <code> tfIdf_vectorizer</code> object in addition to document term matrix. The vectorizer object can later be used to transform test set (unseen/new) titles during prediction. </p>
   
@@ -82,9 +83,9 @@ def preProcessing(titles):
     dtm = tfIdf_vectorizer.fit_transform(titles).toarray()
     return dtm, tfIdf_vectorizer</code></pre>
   
-<p>The document term matrix (from Tf-Idf) is usually very high dimensional and sparse. It can create issues for machine learning algorithms during the learning phase. Therefore, it is recommended to reduce the dimensionality of the dataset by either feature selection or dimensionality reduction methods. The former selects important features from the original feature set whereas, later learns new features from the original set in some other dimension. We will apply Chi Square and Information Gain as feature selection methods and Latent Semantic Analysis as dimensionality reduction technique.</p>
+<p>The document term matrix (from Tf-Idf) is usually very high dimensional and sparse. It can create issues for machine learning algorithms during the learning phase. Therefore, it is recommended to reduce the dimensionality of the dataset by either feature selection or dimensionality reduction methods. The former selects important features from the original feature set whereas, later learns new features from the original set in some other dimension. We will apply Chi-Square and Information Gain as feature selection methods and Latent Semantic Analysis as dimensionality reduction technique.</p>
   
-<p>The χ2 test is used in statistics to test the independence of two events. More precisely in feature selection, it is used to test whether the occurrence of a specific term and the occurrence of a specific class are independent. <code>featuresByChiSq</code> method takes titles and corresponding labels along with a number of top features we want to get based on their importance. </p>
+<p>The χ2 test is used in statistics to test the independence of two events. More precisely, in feature selection, it is used to test whether a specific term and the occurrence of a specific class are independent. <code>featuresByChiSq</code> method takes titles and corresponding labels along with a number of top features we want to get based on their importance. </p>
   
 <p>Information gain is another technique to determine the relative importance of the term. It measures the number of bits required for category prediction by knowing the presence or the absence of a term in the document. The <code>featuresByInformationGain</code> method uses decision tree and entropy criteria to learn discriminative features.</p>
   
@@ -108,7 +109,7 @@ def featuresByLSA(features,ncomponents=100):
     dtm_lsa = lsa.fit_transform(features)
     return dtm_lsa</code></pre>
   
-<p>We will use three classification algorithms to categorize research papers. 1) Support vector machine with linear kernel 2) Random forest and 3) Multinomial Naïve Bayes. For evaluating/comparing how well the models are performing stratified k-fold cross validation will be used. It seeks to ensure that each fold is a good representative of a whole. Generally, this is used to evaluate the performance of supervised learning algorithms and aims to ensure, each class has (approximately) equal representation across each fold. Weighted average precision, recall and f-score will be calculated that can be used for final model selection. The <code>crossValidate</code> method will perform above-discussed steps of model training and evaluation. It takes document term matrix, class labels, classifier name and number of folds for cross validation and returns averaged precision, recall and f-score.</p>
+<p>We will use three classification algorithms to categorize research papers. 1) Support vector machine with linear kernel 2) Random forest and 3) Multinomial Naïve Bayes. For evaluating/comparing how well the models are performing, stratified k-fold cross-validation will be used. It seeks to ensure that each fold is a good representative of a whole. Generally, this is used to evaluate the performance of supervised learning algorithms and aims to ensure, each class has (approximately) equal representation across each fold. Weighted average precision, recall, and f-score will be calculated to be used for final model selection. The <code>crossValidate</code> method will perform above-discussed steps of model training and evaluation. It takes document term matrix, class labels, classifier name, number of folds for cross-validation and returns averaged precision, recall, and f-score.</p>
   
 <pre><code class="language-python line-numbers">def crossValidate(document_term_matrix,labels,classifier="SVM",nfold=10):
     clf = None
@@ -140,7 +141,7 @@ def featuresByLSA(features,ncomponents=100):
 </div>
 
 <div class="text-justify">
-<p>We came a long way and have all the required pieces to achieve the goal of research papers categorization by conferences. Now we just need to call above defined methods in order from reading dataset, pre-processing it, performing feauture extraction, training and evaluating classifiers. These steps should be performed systematically to see which techniques/classifiers are working well.</p>
+<p>We came a long way and had all the required pieces to achieve the goal of research papers categorization by conferences. We need to call the above-defined methods in order from reading datasets, pre-processing them, performing feature extraction, training, and evaluating classifiers. These steps should be performed systematically to see which techniques/classifiers are working well.</p>
   
 <pre><code class="language-python line-numbers">titles, labels = loadData()
 processed_titles = preProcessing(titles)
@@ -153,12 +154,12 @@ lsaDtm = featuresByLSA(dtm,100)
 precision, recall, fscore = crossValidate(chisqDtm,labels,"SVM",10)
 print precision, recall, f-score</code></pre>
   
-<p>Results achieved by executing above code are shown below in Table 1. Default hyper- parameters values are used for all the classifiers. I would recommend trying different text processing techniques, a number of features, optimize hyper parameter values and even use some different classification algorithm. </p>
+<p>Results achieved by executing the above code are shown below in Table 1. Default hyper-parameters values are used for all the classifiers. I would recommend trying different text processing techniques, a number of features, optimizing hyperparameter values and even using different classification algorithms. </p>
   
 <p style="text-align:center"><img src="../img/tc-results.png" alt="Classification results"/>
 </p>    
 
-<p>In this tutorial, we evaluated the performance of different classifiers using 10-fold stratified cross-validation technique after applying text pre-processing, feature selection along with dimensionality reduction methods for text classification problem, which is to determine most suitable conference for a research paper based on its title. If you want to learn more about these methods, please consult the papers mentioned below.</p>
+<p>In this tutorial, we evaluated the performance of different classifiers using the 10-fold stratified cross-validation technique after applying text pre-processing, feature selection,  dimensionality reduction methods for text classification problems, which is to determine the most suitable conference for a research paper based on its title. If you want to learn more about these methods, please consult the papers mentioned below.</p>
   
 <p>The Python notebook and dataset for this blog post is available at this<a href="https://github.com/aqibsaeed/Research-Paper-Categorization"><b> link</b></a>.</p>
   
