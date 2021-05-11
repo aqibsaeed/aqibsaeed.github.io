@@ -19,10 +19,10 @@ gh-badge:
   
 <p>Last updated: 28-05-2020</p>
   
- <p> In <a href="http://aqibsaeed.github.io/2016-09-03-urban-sound-classification-part-1/">part one</a>, we learnt to extract various hand-crafted features from audio clips. We, also, trained a simple feedforward neural network to classify each sound into a predefined category. Today, we will go one step further and see how we can apply Convolution Neural Network (CNN) to perform the same task of urban sound classification.</p>
-
+ <p> In <a href="http://aqibsaeed.github.io/2016-09-03-urban-sound-classification-part-1/">part one</a>, we learnt to extract various hand-crafted features from audio clips. We also trained a simple feedforward neural network to classify each sound into a predefined category. Today, we will go one step further and see how we can apply Convolution Neural Network (CNN) to perform the same task of urban sound classification.</p>
+  
 <p>
-<i>Note: If you want to get in-depth understanding of how CNN works. Kindly consult following resources:</i>
+<i>Note: If you want to get an in-depth understanding of how CNN works. Kindly consult the following resources:</i>
 <a href="http://cs231n.github.io/convolutional-networks">[1]</a>, 
 <a href="http://arxiv.org/pdf/1603.07285v1.pdf">[2]</a> and 
 <a href="http://www.deeplearningbook.org/contents/convnets.html">[3]</a>.
@@ -30,9 +30,9 @@ gh-badge:
 </div>
 
 <div class="text-justify">
-<p>The well-known application of CNN is image classification, where a fixed dimension image is fed into a network along with different channels (RGB in the case of a color image) and after various transformation steps via application of convolution, pooling and fully connected layers, the network outputs class probabilities for the image.  We want to do the same, but here instead of an image, we have sound clips. A quick search on Google Scholar provide a lot of research papers, which discuss the implementation of CNN for sound recognition. A paper I found particularly interesting and quite relevant is <i>Environmental sound classification with convolutional neural networks</i> by <i>Karol J. Piczak</i>. I borrowed the idea of dataset preparation (i.e. feature extraction) for CNN from this paper. For example: how to get equal size segments from varying length audio clips and which audio feature(s) we can feed as a separate channel (just like RGB of a color image) into the network. Once we have the initial pre-processed dataset ready, we can train a deep convolutional network (composed of different layers) as we want!</p>
+<p>The well-known application of CNN is image classification, where a fixed dimension image is fed into a network along with different channels (RGB in the case of a color image). After various transformation steps via convolution, pooling, and fully connected layers, the network outputs class probabilities for the image.  We want to do the same, but here instead of an image, we have sound clips. A quick search on Google Scholar provides many research papers, which discuss the implementation of CNN for sound recognition. A paper I found particularly interesting and quite relevant is <i>Environmental sound classification with convolutional neural networks</i> by <i>Karol J. Piczak</i>. I borrowed the idea of dataset preparation (i.e., feature extraction) for CNN from this paper. For example: how to get equal size segments from varying length audio clips and which audio feature(s) we can feed as a separate channel (just like RGB of a color image) into the network. Once we have the initial pre-processed dataset ready, we can train a deep convolutional network (composed of different layers) as we want!</p>
   
-<p>Let's define a function to calculate log scaled mel-spectrograms and their corresponding deltas from a sound clip.  Regarding fixed size input, we will divide each sound clip into segments of 60x41 (60 rows and 41 columns). The mel-spec and their deltas will become two channels, which we will fed into the CNN. Other features can be calculated in the same way, which can be used as an additional (separate) input channel. </p>
+<p>Let us define a function to calculate log scaled Mel-spectrograms and their corresponding deltas from a sound clip.  We will divide each sound clip into segments of 60x41 (60 rows and 41 columns) regarding fixed-size input. The Mel-spec and their deltas will become two channels, which we will feed into the CNN. Other features can be calculated in the same way, which can be used as an additional (separate) input channel. </p>
   
 <p style="text-align:center"><img src="../img/urban-sound-cnn.PNG" alt="CNN Model Architecture"/></p> 
 
@@ -102,7 +102,7 @@ for sub_dir in sub_dirs:
 </div>
 
 <div class="text-justify">
-<p>Now we define a convolutional neural network with four layers each followed by batch normalization and max pooling, after the last convolutional layer we will add a global pooling to extract embedding which are further processed by a fully-connected layer. Lastly, a dense layer with softmax activation is added to output probabilities of the sound classes. We will use Adam optimizer to minimize a sparse categorical crossentropy objective for training the network.</p>
+<p>Now, we define a convolutional neural network with four layers, each followed by batch normalization and max-pooling; after the last convolutional layer, we will add a global pooling to extract embedding, which is further processed by a fully-connected layer. Lastly, a dense layer with softmax activation is added to output probabilities of the sound classes. We will use Adam optimizer to minimize a sparse categorical cross-entropy objective for training the network.</p>
 
 <pre><code class="language-python line-numbers">### Define convolutional network architecture ###
 def get_network():
@@ -147,7 +147,7 @@ def get_network():
     return model
 </code></pre>
 
-<p>The next step is to train and evaluate the network with 10-folds cross-validation. During evaluation on the test sound clips, we will average the predictions over all segments of the audio as clips could be of varying length. Lastly, we will average the the accuracies of all the ten folds to get an estimation of network performance.</p>
+<p>The next step is to train and evaluate the network with 10-folds cross-validation. During the evaluation of the test sound clips, we will average the predictions over all segments of the audio as clips could be of varying length. Lastly, we will average the accuracies of all the ten folds to get an estimation of network performance.</p>
 
 <pre><code class="language-python line-numbers">### Train and evaluate via 10-Folds cross-validation ###
 accuracies = []
@@ -193,7 +193,7 @@ for train_index, test_index in kf.split(folds):
 print("Average 10 Folds Accuracy: {0}".format(np.mean(accuracies)))
 </code></pre>
 
-<p>This blog post discussed a strategy for preparing a sound dataset for learning deep convolutional network to recognize daily-life sounds. I would encourage you to experiement with the network architecture through and train the network for several epochs to improve recognition. If you have any question or feedback, please comment below.</p>
+<p>This blog post discussed a strategy for preparing a sound dataset for learning a deep convolutional network to recognize daily-life sounds. I would encourage you to experiment with the network architecture and train the network for several epochs to improve recognition. If you have any questions or feedback, please comment below.</p>
 
 <p>The python notebook is available at the following <a href="https://github.com/aqibsaeed/Urban-Sound-Classification"><b>link</b></a>.</p>
 </div>
