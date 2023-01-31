@@ -1,0 +1,15 @@
+</dt-appendix>
+</body>
+<script src="lib/blazy.js"></script>
+<script>
+  var bLazy = new Blazy({
+    success: function(){
+      updateCounter();
+    }
+  });
+  var imageLoaded = 0;
+  function updateCounter() {
+    imageLoaded++;
+    console.log("blazy image loaded: "+imageLoaded);
+  }
+</script>

@@ -1,0 +1,514 @@
+<table valign="top">
+
+  <!-- project block -->
+  <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_sg.svg" style="width:55%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">The Augmented Image Prior: Distilling 1000 Classes by Extrapolating from a Single Image</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://single-image-distill.github.io/" target="_blank">Project Page</a>     
+	  <a class="project-link" href="https://arxiv.org/pdf/2112.00725.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/yukimasano/single-img-extrapolating" target="_blank">Code</a>
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/asano2021extrapolating.bib" target="_blank">BibTex</a>
+      </div><br>Yuki M. Asano*, Aaqib Saeed* @ <a class="project-link" href="https://iclr.cc/">ICLR 2023</a>
+      <br><br> 
+      We developed a framework for training neural networks from scratch using a <i>single image</i> by means of knowledge distillation from a supervised pretrained teacher.<br><br>
+      We demonstrate that it is possible to extrapolate to semantic classes such as those of ImageNet using single datum as models' inputs. We leverage knowledge distillation for this and achieve performances of 74% on CIFAR-100, 69% on ImageNet, 75.2% on UCF-101, 51% on Kinetics-400 and by extending this method to audio, 84% on SpeechCommands.
+    </td>
+  </tr>	 
+
+<!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_aloe.svg" style="width:76%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Active Learning of Non-semantic Speech Tasks with Pretrained Models</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://arxiv.org/pdf/2211.00119.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/HarlinLee/ALOE" target="_blank">Code</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/Lee2022Active.bib" target="_blank">BibTex</a>
+      </div><br>Harlin Lee, <u>Aaqib Saeed</u>, Andrea L. Bertozzi
+      <br><br>
+      Pretraining neural networks with massive unlabeled datasets has become popular as it equips the deep models with a better prior to solve downstream tasks. However, this approach generally assumes that for downstream tasks, we have access to annotated data of sufficient size. 
+      In this work, we propose ALOE, a novel system for improving the data- and label-efficiency of non-semantic speech tasks with active learning. ALOE uses pre-trained models in conjunction with active learning to label data incrementally and learns classifiers for downstream tasks, thereby mitigating the need to acquire labeled data beforehand.
+      <br>
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_oda.svg" style="width:100%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">On Out-of-Distribution Detection for Audio with Deep Nearest Neighbors</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://zaharah.github.io/ood_audio/" target="_blank">Project Page</a>
+	  <a class="project-link" href="https://arxiv.org/pdf/2210.15283.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/bukhsh2022out.bib" target="_blank">BibTex</a>
+      </div><br>Zaharah Bukhsh, Aaqib Saeed
+      <br><br>
+      Out-of-distribution (OOD) detection is concerned with identifying data points that do not belong to the same distribution as the model's training data. For the safe deployment of predictive models in a real-world environment, it is critical to avoid making confident predictions on OOD inputs as it can lead to potentially dangerous consequences.<br><br>
+      However, OOD detection remains largely an under-explored area in the audio (and speech) domain. This is despite the fact that audio is a central modality for many tasks, such as speaker diarization, spoken language identification, and sound event detection. To address this, we propose to leverage feature-space of the model with deep k-nearest neighbors to detect OOD samples. 
+      <br>
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_pediatric_sleep.svg" style="width:95%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Automatic Sleep Scoring from Large-scale Multi-channel Pediatric EEG</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://harlinlee.github.io/pediatric_sleep_scoring/" target="_blank">Project Page</a>
+	  <a class="project-link" href="https://arxiv.org/pdf/2207.06921.pdf" target="_blank">PDF</a>
+	  <a class="project-link" href="https://github.com/HarlinLee/pediatric_sleep_scoring" target="_blank">Code</a>
+	  <!-- <a class="project-link" href="https://aqibsaeed.github.io/assets/misc/pediatric eeg_ts4h_poster.pdf" target="_blank">Poster</a> -->
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/lee2022pediatric.bib" target="_blank">BibTex</a>
+      </div><br>Harlin Lee, Aaqib Saeed @ <a class="project-link" href="https://timeseriesforhealth.github.io/" target="_blank">Learning from Time Series for Health - Workshop at NeurIPS 2022</a>
+      <br><br>
+      Sleep is essential to the health of infants, children, and adolescents, and sleep scoring is the initiative to accurately diagnose and treat potentially life-threatening conditions. Here, we present the first automated sleep scoring results on a recent large-scale pediatric sleep study dataset collected during standard clinical care.<br><br>
+      We develop a transformer-based model that learns to classify five sleep stages from millions of multi-channel electroencephalogram (EEG) sleep epochs. Further, we conduct an in-depth analysis of the model performance based on patient demographics and EEG channels.
+      <br>
+      <small><a href="https://storyset.com/data">Data illustrations by Storyset</a></small>
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_fedln.svg" style="width:80%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Federated Learning with Noisy Labels</div>
+      <dt-byline>
+      <div class="byline"> 
+	  <a class="project-link" href="https://federatedml.github.io/FedLN/" target="_blank">Project Page</a>
+	  <a class="project-link" href="https://arxiv.org/pdf/2208.09378.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/tsouvalas2022federated.bib" target="_blank">BibTex</a>
+      </div><br>Vasileios Tsouvalas, <u>Aaqib Saeed</u>, Tanir Ozcelebi, Nirvana Meratnia <br><br>
+	Short Paper @ <a class="project-link" href="https://sites.google.com/view/interpolation-workshop" target="_blank">Interpolation and Beyond - Workshop at NeurIPS 2022</a>
+      <br><br>
+      Federated learning (FL) approaches assume high-quality labels are readily available on users' devices; in reality, label noise can naturally occur in the FL setting and follows a non-i.i.d. distribution among clients. Here, we propose FedLN, a framework to deal with label noise across different FL training stages: FL initialization, on-device model training, and server-side model aggregation.<br><br>
+      Extensive experiments on various publicly available vision and audio datasets demonstrate a 24% improvement on average compared to other existing methods for a label noise level of 70%. We further validate the efficiency of FedLN in human-annotated real-world noisy datasets and report a 9% increase on average in models' recognition performance.      
+    </td>
+  </tr>
+	
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_brillsson.svg" style="width:65%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Distilled Non-Semantic Speech Embeddings with Binary Neural Networks</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://arxiv.org/pdf/2207.05784.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/lee2022distilled.bib" target="_blank">BibTex</a>
+      </div><br>Harlin Lee, Aaqib Saeed
+      <br><br>
+      We introduce BRILLsson, an approach for learning representations with binary neural networks for a broad range of non-semantic speech tasks. We leverage knowledge distillation for training binary models using a large and real-valued TRILLsson model with only a fraction of the dataset used to train the teacher model.<br><br>
+      Our models are only 2MB in size with a latency less than 8ms, making them suitable for deployment in low-resource devices, such as wearables. We evaluate BRILLsson models on eight benchmark tasks (including but not limited to spoken language identification, emotion recognition, health condition diagnosis, and keyword spotting), and demonstrate that our proposed approach results in ultra-light and low-latency models that perform as well as large-scale models.
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_bnn_ee.svg" style="width:45%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Binary Early-Exit Network for Adaptive Inference on Low-Resource Devices</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://arxiv.org/pdf/2206.09029.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://www.isca-speech.org/archive/interspeech_2022/saeed22_interspeech.html" target="_blank">Link (Official)</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/Binary-Early-Exit-Network" target="_blank">Code</a>
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2022binary.bib" target="_blank">BibTex</a>
+      </div><br>Aaqib Saeed @ <a class="project-link" href="https://interspeech2022.org/" target="_blank">Interspeech 2022</a>
+      <br><br>
+	Deep neural networks have become larger over the years with the increasing demand for computational resources for inference. Binary neural networks (BNNs) tackle the issue to an extent with extreme compression and speed-up gains compared to real-valued
+	models. We propose a simple but effective method to accelerate inference through unifying BNNs with an early-exiting strategy. <br><br>
+	Our approach allows simple instances to exit early based on a decision threshold and utilizes output layers added to different intermediate layers to avoid executing the entire binary neural model. We extensively evaluate our method on three audio classification tasks and across four BNNs architectures to demonstrate favorable quality-efficiency trade-offs 
+	while being controllable with an entropy-based threshold specified by the system user.
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_cocoa.svg" style="width:100%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">COCOA: Cross Modality Contrastive Learning for Sensor Data</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://arxiv.org/pdf/2208.00467.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://dl.acm.org/doi/10.1145/3550316" target="_blank">Link (Official)</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/10.11453550316.bib" target="_blank">BibTex</a>
+	      </div><br>Shohreh Deldari, Hao Xue, <u>Aaqib Saeed</u>, Daniel V. Smith, Flora D. Salim @ <a class="project-link" href="https://ubicomp.org/ubicomp2022/" target="_blank">ACM IMWUT 2022 - Ubicomp 2022</a>
+      <br><br>
+	We propose COCOA (Cross mOdality COntrastive leArning), a self-supervised model that employs a novel objective function to learn high-quality representations from multisensor data by computing the cross-correlation between different data modalities and minimizing the similarity between irrelevant instances.<br><br>
+	We evaluate the effectiveness of COCOA across a range of datasets and against several self-supervised methods. COCOA is highly label-efficient than the other baselines including the fully supervised model while using only one-tenth of available labeled data.
+    </td>
+  </tr>
+	
+ <!-- project block -->
+ <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_ssrl_survey.svg" style="width:100%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Beyond Just Vision: A Review on Self-Supervised Representation Learning on
+Multimodal and Temporal Data</div>
+      <dt-byline>
+      <div class="byline">  
+	  <a class="project-link" href="https://arxiv.org/pdf/2206.02353.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/deldari2022beyond.bib" target="_blank">BibTex</a>
+      </div><br>Shohreh Deldari, Hao Xue, <u>Aaqib Saeed</u>, Jiayuan He, Daniel V. Smith, Flora D. Salim
+      <br><br>
+	Self-supervised methods aim to improve data efficiency of deep neural networks through discriminative pre-training of models using supervisory signals that can be obtained from the raw data itself without any human intervention. <br><br>
+	We provide a comprehensive review of multimodal self-supervised learning methods for temporal data. To this end, we 1) provide a comprehensive categorization of existing SSRL methods, 2) introduce a generic pipeline by defining the key components of a SSRL framework, 3) compare existing models in terms of their objective function, network architecture and potential applications, and 4) review existing multimodal techniques in each category and various modalities, while also highlighting weaknesses and future opportunities. 
+	We believe our work develops a perspective on the requirements of SSRL in domains that utilize multimodal and/or temporal data.
+    </td>
+  </tr>
+	
+	
+ <!-- project block -->
+  <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_fedstar.svg" style="width:95%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Federated Self-Training for Semi-Supervised Audio Recognition</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://arxiv.org/pdf/2107.06877.pdf" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://dl.acm.org/doi/10.1145/3520128 " target="_blank">Link (Official)</a> 
+	  <a class="project-link" href="https://github.com/FederatedML/FedSTAR " target="_blank">Code</a> 
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/tsouvalas2021federated.bib" target="_blank">BibTex</a>
+        </div><br>Vasileios Tsouvalas, <u>Aaqib Saeed</u>, Tanir Ozcelebi @ <a class="project-link" href="https://dl.acm.org/journal/tecs" target="_blank">ACM TECS 2022</a><br><br>
+	<a class="project-link" href="https://ieeexplore.ieee.org/document/9746356" target="_blank">Short Paper</a>@ <a class="project-link" href="https://2022.ieeeicassp.org/" target="_blank"> IEEE ICASSP 2022</a>
+        <br><br>
+	Federated Learning is a distributed machine learning paradigm dealing with decentralized and personal datasets. Since data reside on devices like smartphones and virtual assistants, labeling is entrusted to clients or labels are extracted in an automated way for learning models. However, in the case of audio data, acquiring semantic annotations can be prohibitively expensive and time-consuming. As a result, an abundance of audio samples remains unlabeled and unexploited. We propose FedSTAR, a semi-supervised learning approach for audio recognition. FedSTAR leverages unlabeled data via self-training to improve the generalization of audio models. <br><br>
+	We show that with as little as 3% labeled data available, FedSTAR on average can improve the recognition rate by 13.28% compared to the fully supervised federated model. We further demonstrate that self-supervised pre-trained models can accelerate the training of on-device models, significantly improving convergence within fewer training rounds.
+    </td>
+  </tr>	 
+
+  <!-- project block -->
+  <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_headgesture.svg" style="width:75%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Recognizing Head Gestures and Facial Expressions with Earbuds</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://dl.acm.org/doi/pdf/10.1145/3462244.3479921" target="_blank">PDF</a> 
+	  <a class="project-link" href="https://dl.acm.org/doi/abs/10.1145/3462244.3479921" target="_blank">Link (Official)</a> 
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/gashi2021hierarchical.bib" target="_blank">BibTex</a>
+      </div><br>Shkurta Gashi, <u>Aaqib Saeed</u>, Alessandra Vicini, Elena Di Lascio, Silvia Santini @ <a class="project-link" href="https://icmi.acm.org/2021/" target="_blank">ACM ICMI 2021</a>
+        <br><br>
+	Head gestures and facial expressions -- like, e.g., nodding or smiling -- are important indicators of the quality of human interactions in physical meetings as well as in a computer-mediated environment. The automated systems able to recognize such behavioral cues can support and improve human interactions. <br><br>
+        In this work, we consider inertial signals collected from unobtrusive, ear-mounted devices to recognize gestures and facial expressions typically performed during social interactions -- head shaking, nodding, smiling, talking, and yawning. We propose a hierarchical classification approach with transfer learning to improve the generalization and data efficiency of the predictive model using raw IMU data.
+    </td>
+  </tr>	 
+	
+  <!-- project block -->
+  <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/overview_lumnet.svg" style="width:95%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">LumNet: Learning to Estimate Vertical Visual Field Luminance for Adaptive Lighting Control</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://dl.acm.org/doi/pdf/10.1145/3463500" target="_blank">PDF</a> 
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/3463500.bib" target="_blank">BibTex</a>
+      </div><br>
+        Prince Songwa, <u>Aaqib Saeed</u>, Sachin Bhardwaj, Thijs Kruisselbrink, Tanir Ozcelebi @ <a class="project-link" href="https://dl.acm.org/journal/imwut" target="_blank">ACM IMWUT 2021</a> - <a class="project-link" href="https://www.ubicomp.org/ubicomp2021/" target="_blank">Ubicomp 2021</a>
+        <br><br>
+	We propose a novel approach to estimate desktop luminance using deep learning for adaptive lighting control. Our proposed LumNet model learns visual representations from ceiling-based images, 
+	which are collected in indoor spaces within the physical vicinity of the user to predict average desktop luminance as experienced in a real-life setting. <br><br>
+	We also present a self-supervised contrastive method for pre-training LumNet with unlabeled data and we demonstrate that the learned features are transferable onto a small labeled dataset which minimizes the requirement of costly data annotations. 
+    </td>
+  </tr>	
+  <!-- project block -->
+  <tr>
+   <td class="project-fig">
+     <div class="figure">
+      <img class="project-img" src="assets/misc/thesis_cover_logo.svg" style="width:85%;"/></div>
+   </td>
+    <td class="project-cell">
+      <div class="project-title">Learning Sensory Representations with Minimal Supervision (PhD Thesis)</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://pure.tue.nl/ws/portalfiles/portal/173547342/thesis" target="_blank">PDF</a> 
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/thesis.bib" target="_blank">BibTex</a>
+      </div><br>
+        Aaqib Saeed - <a class="project-link" href="https://research.tue.nl/en/publications/learning-sensory-representations-with-minimal-supervision" target="_blank">PhD Thesis (2021) - Eindoven University of Technology</a>
+        <br><br>
+	We develop novel techniques that lie on the intersection of deep learning, ambient sensing, and ubiquitous computing to address issues pertaining to learning from unlabeled sensory data and making models robust to various input artifacts. The research focuses on representation learning with deep neural networks to realize the vision of self-learning for embedded intelligence in everyday devices, such as smartphones, wearables, earables, and more. 
+	<br><br>Our proposed methods are primarily based on the theme of self-supervised learning to extract generic representations from multi-modal sensory inputs, such as electroencephalogram, audio, accelerometer, and more. Our work enables deep neural networks to learn broadly useful representations that perform well on a spectrum of downstream tasks, are robust to noise and other artifacts, and generalize when transferred to other domains. 
+    </td>
+  </tr>	
+	
+  <!-- project block -->	
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_cola.svg"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Contrastive Learning of General-Purpose Audio Representations</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://arxiv.org/pdf/2010.10915.pdf" target="_blank">PDF</a>
+	  <a class="project-link" href="https://github.com/google-research/google-research/tree/master/cola" target="_blank">Code</a>    
+          <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2020contrastive.bib" target="_blank">BibTex</a>
+	  <!-- <a class="project-link" href="https://aqibsaeed.github.io/assets/misc/cola_poster.pdf" target="_blank">Poster</a> -->
+	  <a class="project-link" href="https://ieeexplore.ieee.org/abstract/document/9413528" target="_blank">Link (Official)</a> 
+      </div><br>
+      Aaqib Saeed, David Grangier, Neil Zeghidour @ <a class="project-link" href="https://2021.ieeeicassp.org/" target="_blank">IEEE ICASSP 2021</a>
+      <br><br>
+      We introduce COLA, a self-supervised pre-training approach for learning a general-purpose representation of audio. We build on top of recent advances in contrastive learning for computer vision and reinforcement learning 
+      to design a lightweight, easy-to-implement self-supervised model of audio. <br><br>
+      We pre-train embeddings on the large-scale Audioset database and transfer these representations to 9 diverse classification tasks, including speech, music, animal sounds, and acoustic scenes.
+      We show that despite its simplicity, our method significantly outperforms previous self-supervised systems. 
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_charm.png"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Learning from Heterogeneous EEG Signals with Differentiable Channel Reordering</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://aqibsaeed.github.io/charm_paper" target="_blank">Project Page</a> 
+	  <a class="project-link" href="https://arxiv.org/pdf/2010.13694.pdf" target="_blank">PDF</a>
+     	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2020learning.bib" target="_blank">BibTex</a>
+	  <!-- <a class="project-link" href="https://aqibsaeed.github.io/assets/misc/charm_poster.pdf" target="_blank">Poster</a>  -->
+	  <a class="project-link" href="https://ieeexplore.ieee.org/abstract/document/9413712" target="_blank">Link (Official)</a>
+      </div><br>
+      Aaqib Saeed, David Grangier, Olivier Pietquin, Neil Zeghidour @ <a class="project-link" href="https://2021.ieeeicassp.org/" target="_blank">IEEE ICASSP 2021</a>
+      <br><br>
+	We propose CHARM, a method for training a single neural network across inconsistent input channels. 
+	Our work is motivated by Electroencephalography (EEG), where data collection protocols from different headsets result in varying channel ordering and number,
+	which limits the feasibility of transferring trained systems across datasets.<br><br>
+	CHARM is differentiable and compatible with architectures (e.g. CNNs) that expect consistent channels. Across different input noising conditions we show its robustness. 
+        We also successfully perform transfer learning between datasets collected with different EEG headsets. 
+    </td>
+  </tr>	
+	
+  <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_sal.svg" style="width:95%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Sense and Learn: Self-Supervision for Omnipresent Sensors</div>
+      <dt-byline>
+      <div class="byline">
+	  <a class="project-link" href="https://aqibsaeed.github.io/sense-and-learn" target="_blank">Project Page</a>
+	  <a class="project-link" href="https://arxiv.org/pdf/2009.13233.pdf" target="_blank">PDF</a>
+	  <a class="project-link" href="https://www.sciencedirect.com/science/article/pii/S2666827021000761" target="_blank">Link (Official)</a>
+      	  <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2020sense.bib" target="_blank">BibTex</a>
+      </div><br>
+	      Aaqib Saeed, Victor Ungureanu, Beat Gfeller @ <a class="project-link" href="https://www.sciencedirect.com/journal/machine-learning-with-applications">Machine Learning with Applications</a>
+      <br><br>
+Looking for a way to utilize large-scale unlabeled sensory (time-series) data to improve generalization on downstream task with few-labeled datapoints? Try: <i>Sense and Learn</i>, a self-supervised learning framework.
+<br><br>
+We propose a suite of self-supervised pretext tasks for pre-training deep neural networks without semantic labels. We evaluate the quality of learned embedding with our framework on a wide variety of end-tasks with a linear classifier on top of a fixed encoder, effectiveness in the low-data regime, and transfer learning. Our approach opens up exciting possibilities for on-device continual learning without requiring supervision.
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_sscl.svg" style="width:85%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Federated Self-Supervised Learning of Multi-Sensor Representations for Embedded Intelligence</div>
+      <dt-byline>
+      <div class="byline">
+	      <a class="project-link" href="https://arxiv.org/pdf/2007.13018.pdf" target="_blank">PDF</a>
+      <a class="project-link" href="https://ieeexplore.ieee.org/document/9141293" target="_blank">Link (Official)</a> 
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/9141293.bib" target="_blank">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Flora D. Salim, Tanir Ozcelebi, Johan Lukkien @ <a class="project-link" href="https://ieee-iotj.org/" target="_blank">IEEE Internet of Things Journal 2020</a>
+      <br><br>
+We present a self-supervised method for learning multi-sensor representations in a federated learning setting from unlabeled and decentralized data. Our scalogram-signal correspondence learning (SSCL) technique utilize wavelet transform and a contrastive objective for training the deep network to determine if a given pair of a signal and its complementary view (i.e., a scalogram generated with wavelet transform) align with each other or not. 
+<br><br>    
+We extensively assess the quality of learned features with SSCL on diverse public datasets, which comprise signals like electroencephalography, blood volume pulse, accelerometer, and Wi-Fi channel state information. We conduct experiments to demonstrate our approach's effectiveness in both centralized and federated settings through linear classification. Mainly, SSCL significantly improves generalization in the low-data regime by reducing the volume of labeled data required through leveraging self-supervised learning.
+    </td>
+  </tr>
+	
+
+	
+   <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_odar.png" style="width:82%; padding-top:8px"></div>
+    </td>
+    <td class="project-cell">
+      <div class="project-title">On-device Learning of Activity Recognition Model (Blogpost)</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://aqibsaeed.github.io/on-device-activity-recognition" target="_blank">Project Page</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/On-device-activity-recognition" target="_blank">Code (Github)</a> 
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2020recognition.bib" target="_blank">BibTex</a>
+      </div><br>
+      Leverage transfer learning for efficiently training activity sensing models directly on the Android device without the need for sending data to the server. <br/><br/> Enabling next-generation privacy-preserving personal informatics apps! 
+   </td>
+  </tr>	
+	
+  <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_ssrl.svg" style="width:85%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Multi-Task Self-Supervised Learning for Human Activity Detection</div>
+      <dt-byline>
+      <div class="byline">
+      <a class="project-link" href="https://sites.google.com/view/self-supervised-ar/" target="_blank">Project Page</a>
+      <a class="project-link" href="https://arxiv.org/pdf/1907.11879.pdf" target="_blank">PDF</a> 
+      <a class="project-link" href="https://dl.acm.org/citation.cfm?id=3328932" target="_blank">Link (Official)</a> 
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2019multi.bib" target="_blank">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Tanir Ozcelebi, Johan Lukkien @ <a class="project-link" href="https://imwut.acm.org/" target="_blank">IMWUT June 2019</a>- <a class="project-link" href="http://ubicomp.org/ubicomp2019" target="_blank">Ubicomp 2019</a> <br><br>
+      <a class="project-link" href="https://drive.google.com/file/d/0B4M2lUVyJzS4WHVLWjdZeGVZLWVDb1puX3N2b19lc0xRQzMw/view">Workshop Paper</a>@&nbsp;<a class="project-link" href="https://sites.google.com/view/self-supervised-icml2019" target="_blank">Self-supervised Learning Workshop ICML 2019</a>
+      <br><br>
+      We've created a Transformation Prediction Network, a self-supervised neural network for representation learning from sensory data that does not require access to any form of semantic labels, e.g., activity classes in human context detection. We demonstrate that simple auxiliary tasks of recognizing signal transformations result in strong supervision for extracting high-level features that generalize well on the down-stream task; substantially improving performance under semi-supervised and transfer learning settings in the low-data regime. 
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+      <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_mmcr.svg"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">End-to-End Multi-Modal Behavioral Context Recognition in a Real-Life Setting</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://ieeexplore.ieee.org/abstract/document/9011194">Paper</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/9011194.bib">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Stojan Trajanovski, Tanir Ozcelebi, Johan Lukkien @ <a class="project-link" href="https://www.fusion2019.org/" target="_blank">Fusion 2019</a>
+      <br><br>
+      The automatic and unobtrusive sensing of human context can help develop solutions for assisted living, fitness tracking, sleep monitoring, and several other fields. Towards addressing this issue, we develop a multi-modal neural network capable of multi-label behavioral context recognition. Our empirical evaluation suggests that a deep convolutional network trained end-to-end achieves comparable performance to manual feature engineering with minimal effort.
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+      <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_aae.svg" style="width:102%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Synthesizing and Reconstructing Missing Sensory Modalities in Behavioral Context Recognition</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://aqibsaeed.github.io/synthesizing-and-reconstructing-missing-sensory-modalities-with-adversarial-autoencoders">Project Page</a>
+      <a class="project-link" href="https://res.mdpi.com/sensors/sensors-18-02967/article_deploy/sensors-18-02967.pdf">Paper</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2018synthesizing.bib">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Tanir Ozcelebi, Johan Lukkien @ <a class="project-link" href="https://www.mdpi.com/journal/sensors" target="_blank">MDPI Sensors 2018</a>
+      <br><br>
+      We propose a method based on an adversarial autoencoder for handling missing sensory features and synthesizing realistic samples. We empirically demonstrate the capability of our approach in comparison with classical techniques for filling-in missing values on a large-scale activity recognition dataset collected in-the-wild. 
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+      <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_drcn.svg" style="width:70%; transform: rotate(270deg);"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Model Adaptation and Personalization for Physiological Stress Detection</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://aqibsaeed.github.io/deep-physiological-stress-detection">Project Page</a>
+      <a class="project-link" href="https://ieeexplore.ieee.org/abstract/document/8631447" target="_blank">Paper</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2018model.bib" target="_blank">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Tanir Ozcelebi, Johan Lukkien, Jan van Erp and Stojan Trajanovski @ <a class="project-link" href="https://dsaa2018.isi.it/home" target="_blank">IEEE DSAA 2018</a>
+      <br><br>
+      Long-Term exposure to stressful situations can have negative health consequences, such as the increased risk of cardiovascular diseases and immune system disorder. We utilize a deep reconstruction classification network and multitask learning for domain adaption and personalization of stress recognition models. The proposed methods performed significantly better than baselines on multimodal physiological (time-series) data collected during driving tasks, in both real-world and driving simulator.
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+      <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_pmtl.svg" style="width:65%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Personalized Driver Stress Detection with Multi-Task Neural Networks using Physiological Signals</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://arxiv.org/pdf/1711.06116.pdf" target="_blank">Paper</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2017personalized.bib" target="_blank">BibTex</a>
+      </div><br>
+      Aaqib Saeed and Stojan Trajanovski @ <a class="project-link" href="https://ml4health.github.io/2017/index.html">ML4H Workshop NeurIPS 2017</a>
+      <br><br>
+      Stress can be seen as a physiological response to everyday emotional, mental, and physical challenges. We suggest a subjects-as-tasks approach for multi-task learning based neural network (with hard parameter sharing of mutual representation and task-specific layers) for personalized stress detection using skin conductance and heart rate from wearable devices.
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+    <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_dpa.svg" style="width:75%;"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">Deep Physiological Arousal Detection in a Driving Simulator using Wearable Sensors</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://ieeexplore.ieee.org/abstract/document/8215701" target="_blank">Paper</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/saeed2017deep.bib" target="_blank">BibTex</a>
+      </div><br>
+      Aaqib Saeed, Stojan Trajanovski, Maurice van Keulen and Jan van Erp @ <a class="project-link" href="https://oakland.edu/secs/dmbih-workshop-2017" target="_blank">DMBIH Workshop IEEE ICDM 2017</a>
+      <br><br>
+      Driving is an activity that requires considerable alertness. Insufficient attention, imperfect perception, inadequate information processing, and sub-optimal arousal are possible causes of poor human performance. Understanding of these causes and the implementation of effective remedies is of crucial importance to increase traffic safety and improve driver's well-being. For this purpose, we develop an arousal detection algorithm using a temporal convolutional neural network. The model is trained on raw physiological signals, i.e., heart rate, skin conductance, and skin temperature.
+    </td>
+  </tr>
+	
+  <!-- project block -->
+  <tr>
+      <td class="project-fig"><div class="figure">
+      <img class="project-img" src="assets/misc/overview_wmi.svg"/>
+    </div></td>
+    <td class="project-cell">
+      <div class="project-title">#WhoAmI in 160 Characters? Classifying Social Identities Based on Twitter</div>
+      <dt-byline><div class="byline">
+      <a class="project-link" href="https://aclweb.org/anthology/papers/W/W16/W16-5608/" target="_blank">Paper</a>
+      <a class="project-link" href="https://github.com/annapriante/identityclassifier" target="_blank">Code</a>
+      <a class="project-link" href="https://github.com/aqibsaeed/aqibsaeed.github.io/blob/master/assets/bib/priante2016whoami.bib" target="_blank">BibTex</a>
+      </div><br>
+      Anna Priante, Djoerd Hiemstra, Tijs van den Broek, Aaqib Saeed, Michel Ehrenhard and Ariana Need @ <a class="project-link" href="https://sites.google.com/site/nlpandcss/previous-editions/nlpcss-at-emnlp-2016">NLP and CSS Workshop EMNLP 2016</a>
+      <br><br>
+      We combine social theory and NLP methods to classify English-speaking Twitter users' online social identity in profile descriptions. Our study shows how social theory can be used to guide NLP methods, and how such methods provide input to revisit traditional social theory that is strongly consolidated in offline settings.
+    </td>
+  </tr>
+
+</table>
