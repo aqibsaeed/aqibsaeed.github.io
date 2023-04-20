@@ -588,32 +588,58 @@ We extensively assess the quality of learned features with SSCL on diverse publi
 	.pt-20{padding-top: 20px;}
 	dt-appendix{font-family: 'Open Sans'; font-weight: 300;}
 	.mb-15{margin-bottom: 15px;}
+	
+        .collapsible {
+            cursor: pointer;
+        }
+        
+        .arrow {
+            display: inline-block;
+            width: 0.5rem;
+            height: 0.5rem;
+            margin-left: 0.5rem;
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+        
+        .down {
+            transform: rotate(225deg);
+        }
+        
+        .hidden {
+            display: none;
+        }
 </style>
-
-
 </body>
 <script src="lib/blazy.js"></script>
 <script>
-  var bLazy = new Blazy({
-    success: function(){
-      updateCounter();
-    }
-  });
-  var imageLoaded = 0;
-  function updateCounter() {
-    imageLoaded++;
-    console.log("blazy image loaded: "+imageLoaded);
-  }
-</script>
-<script>
+	var bLazy = new Blazy({
+	   success: function(){
+	     updateCounter();
+	   }
+	});
+	var imageLoaded = 0;
+	function updateCounter() {
+	   imageLoaded++;
+	}
 	var block_fn;
 	function showPageCallback(){
 	  block_fn = setTimeout(showPage, 300);
 	}
 	function showPage() {
 	  document.getElementById("dtbody").style.display = "block";
-    document.getElementById("dtappendix").style.display = "block";
+	  document.getElementById("dtappendix").style.display = "block";
 	}
+	const moreBtn = document.getElementById('moreBtn');
+	const subList = document.getElementById('subList');
+	const arrow = document.querySelector('.arrow');
+
+	moreBtn.addEventListener('click', function() {
+	subList.classList.toggle('hidden');
+	arrow.classList.toggle('down');
+	});
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79826043-1"></script>
 <script>
