@@ -142,3 +142,7 @@ dt-article figcaption b {
   color: rgb(5 101 197 / 90%);
   font-weight:400;
 }
+
+.text-underline{
+  text-decoration: underline;
+}
