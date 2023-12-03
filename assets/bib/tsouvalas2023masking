@@ -1,0 +1,6 @@
+@article{tsouvalas2023masking,
+  title={Federated Fine-Tuning of Foundation Models via Probabilistic Masking},
+  author={Tsouvalas, Vasileios and Asano, Yuki and Saeed, Aaqib},
+  journal={arXiv preprint arXiv:2311.17299},
+  year={2023}
+}
