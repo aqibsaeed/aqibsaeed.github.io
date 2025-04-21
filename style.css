@@ -151,7 +151,6 @@ dt-article figcaption b {
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   flex-wrap: wrap;
 }
         
@@ -169,11 +168,7 @@ dt-article figcaption b {
     color: #666;
 }
 
-.profile-info h1 {
-    margin: 0 0 10px 0;
-}
-
-.profile-info h2 {
+.header h2 {
     font-size: 26px;
 }
 
