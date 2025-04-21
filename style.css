@@ -176,3 +176,16 @@ dt-article figcaption b {
 .profile-info h2 {
     font-size: 26px;
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+	flex-direction: column;
+	align-items: flex-start;
+    }
+    
+    .profile-image {
+	margin-bottom: 20px;
+	margin-right: 0;
+    }
+}
