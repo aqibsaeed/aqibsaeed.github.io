@@ -159,7 +159,7 @@ dt-article figcaption b {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin-right: 30px;
+    margin-right: 25px;
     object-fit: cover;
     background-color: #f0f0f0; /* Placeholder background */
     display: flex;
@@ -167,4 +167,8 @@ dt-article figcaption b {
     justify-content: center;
     font-size: 40px;
     color: #666;
+}
+
+.profile-info h1 {
+    margin: 0 0 10px 0;
 }
